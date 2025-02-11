@@ -49,7 +49,6 @@ class BookingCalendarMain extends StatefulWidget {
       this.disabledDays,
       this.disabledDates,
       this.lastDay,
-      this.listType,
       this.avataricon,
       required this.avatar,
       required this.medico})
@@ -100,8 +99,6 @@ class BookingCalendarMain extends StatefulWidget {
   final Widget? avataricon;
 
   final Widget? wholeDayIsBookedWidget;
-
-  final bool? listType;
 
   @override
   State<BookingCalendarMain> createState() => _BookingCalendarMainState();
@@ -294,121 +291,54 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                           child: (widget.wholeDayIsBookedWidget != null &&
                                   controller.isWholeDayBooked())
                               ? widget.wholeDayIsBookedWidget!
-                              : widget.listType != null &&
-                                      widget.listType == true
-                                  ? GridView.builder(
-                                      physics: widget.theScrollPhysics ??
-                                          const BouncingScrollPhysics(),
-                                      itemCount:
-                                          controller.allBookingSlots.length,
-                                      itemBuilder: (context, index) {
-                                        TextStyle? getTextStyle() {
-                                          if (controller.isSlotBooked(index)) {
-                                            return widget.bookedSlotTextStyle;
-                                          } else if (index ==
-                                              controller.selectedSlot) {
-                                            return widget.selectedSlotTextStyle;
-                                          } else {
-                                            return widget
-                                                .availableSlotTextStyle;
-                                          }
-                                        }
+                              : ListView.builder(
+                                  physics: widget.theScrollPhysics ??
+                                      const BouncingScrollPhysics(),
+                                  itemCount: controller.allBookingSlots.length,
+                                  itemBuilder: (context, index) {
+                                    TextStyle? getTextStyle() {
+                                      if (controller.isSlotBooked(index)) {
+                                        return widget.bookedSlotTextStyle;
+                                      } else if (index ==
+                                          controller.selectedSlot) {
+                                        return widget.selectedSlotTextStyle;
+                                      } else {
+                                        return widget.availableSlotTextStyle;
+                                      }
+                                    }
 
-                                        final slot = controller.allBookingSlots
-                                            .elementAt(index);
-                                        return BookingSlot(
-                                          hideBreakSlot: widget.hideBreakTime,
-                                          pauseSlotColor: widget.pauseSlotColor,
-                                          availableSlotColor:
-                                              widget.availableSlotColor,
-                                          bookedSlotColor:
-                                              widget.bookedSlotColor,
-                                          selectedSlotColor:
-                                              widget.selectedSlotColor,
-                                          isPauseTime: controller
-                                              .isSlotInPauseTime(slot),
-                                          isBooked:
-                                              controller.isSlotBooked(index),
-                                          isSelected:
-                                              index == controller.selectedSlot,
-                                          onTap: () =>
-                                              controller.selectSlot(index),
-                                          child: Center(
-                                            child: Text(
-                                              widget.formatDateTime
-                                                      ?.call(slot) ??
-                                                  BookingUtil.formatDateTime(
-                                                      slot),
-                                              style: getTextStyle(),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount:
-                                            widget.bookingGridCrossAxisCount ??
-                                                3,
-                                        childAspectRatio: widget
-                                                .bookingGridChildAspectRatio ??
-                                            1.5,
-                                      ),
-                                    )
-                                  : ListView.builder(
-                                      physics: widget.theScrollPhysics ??
-                                          const BouncingScrollPhysics(),
-                                      itemCount:
-                                          controller.allBookingSlots.length,
-                                      itemBuilder: (context, index) {
-                                        TextStyle? getTextStyle() {
-                                          if (controller.isSlotBooked(index)) {
-                                            return widget.bookedSlotTextStyle;
-                                          } else if (index ==
-                                              controller.selectedSlot) {
-                                            return widget.selectedSlotTextStyle;
-                                          } else {
-                                            return widget
-                                                .availableSlotTextStyle;
-                                          }
-                                        }
-
-                                        final slot = controller.allBookingSlots
-                                            .elementAt(index);
-                                        return BookingListElement(
-                                          horario: widget.formatDateTime
-                                                  ?.call(slot) ??
+                                    final slot = controller.allBookingSlots
+                                        .elementAt(index);
+                                    return BookingListElement(
+                                      horario:
+                                          widget.formatDateTime?.call(slot) ??
                                               BookingUtil.formatDateTime(slot),
-                                          medico: widget.medico,
-                                          avatar: widget.avatar,
-                                          avataricon: widget.avataricon,
-                                          hideBreakSlot: widget.hideBreakTime,
-                                          pauseSlotColor: widget.pauseSlotColor,
-                                          availableSlotColor:
-                                              widget.availableSlotColor,
-                                          bookedSlotColor:
-                                              widget.bookedSlotColor,
-                                          selectedSlotColor:
-                                              widget.selectedSlotColor,
-                                          isPauseTime: controller
-                                              .isSlotInPauseTime(slot),
-                                          isBooked:
-                                              controller.isSlotBooked(index),
-                                          isSelected:
-                                              index == controller.selectedSlot,
-                                          onTap: () =>
-                                              controller.selectSlot(index),
-                                          child: Center(
-                                            child: Text(
-                                              widget.formatDateTime
-                                                      ?.call(slot) ??
-                                                  BookingUtil.formatDateTime(
-                                                      slot),
-                                              style: getTextStyle(),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ));
+                                      medico: widget.medico,
+                                      avatar: widget.avatar,
+                                      avataricon: widget.avataricon,
+                                      hideBreakSlot: widget.hideBreakTime,
+                                      pauseSlotColor: widget.pauseSlotColor,
+                                      availableSlotColor:
+                                          widget.availableSlotColor,
+                                      bookedSlotColor: widget.bookedSlotColor,
+                                      selectedSlotColor:
+                                          widget.selectedSlotColor,
+                                      isPauseTime:
+                                          controller.isSlotInPauseTime(slot),
+                                      isBooked: controller.isSlotBooked(index),
+                                      isSelected:
+                                          index == controller.selectedSlot,
+                                      onTap: () => controller.selectSlot(index),
+                                      child: Center(
+                                        child: Text(
+                                          widget.formatDateTime?.call(slot) ??
+                                              BookingUtil.formatDateTime(slot),
+                                          style: getTextStyle(),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ));
                     },
                   ),
                   const SizedBox(

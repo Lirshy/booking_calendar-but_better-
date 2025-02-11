@@ -7,46 +7,45 @@ import '../model/enums.dart';
 import 'booking_controller.dart';
 
 class BookingCalendar extends StatelessWidget {
-  const BookingCalendar(
-      {Key? key,
-      required this.bookingService,
-      required this.getBookingStream,
-      required this.uploadBooking,
-      required this.convertStreamResultToDateTimeRanges,
-      this.bookingExplanation,
-      this.bookingGridCrossAxisCount,
-      this.bookingGridChildAspectRatio,
-      this.formatDateTime,
-      this.bookingButtonText,
-      this.bookingButtonColor,
-      this.bookedSlotColor,
-      this.selectedSlotColor,
-      this.availableSlotColor,
-      this.bookedSlotText,
-      this.selectedSlotText,
-      this.availableSlotText,
-      this.availableSlotTextStyle,
-      this.selectedSlotTextStyle,
-      this.bookedSlotTextStyle,
-      this.gridScrollPhysics,
-      this.loadingWidget,
-      this.errorWidget,
-      this.uploadingWidget,
-      this.wholeDayIsBookedWidget,
-      this.pauseSlotColor,
-      this.pauseSlotText,
-      this.pauseSlots,
-      this.hideBreakTime,
-      this.locale,
-      this.startingDayOfWeek = StartingDayOfWeek.monday,
-      this.disabledDays,
-      this.disabledDates,
-      this.lastDay,
-      this.listType,
-      required this.avatar,
-      this.avataricon,
-      required this.medico,})
-      : super(key: key);
+  const BookingCalendar({
+    Key? key,
+    required this.bookingService,
+    required this.getBookingStream,
+    required this.uploadBooking,
+    required this.convertStreamResultToDateTimeRanges,
+    this.bookingExplanation,
+    this.bookingGridCrossAxisCount,
+    this.bookingGridChildAspectRatio,
+    this.formatDateTime,
+    this.bookingButtonText,
+    this.bookingButtonColor,
+    this.bookedSlotColor,
+    this.selectedSlotColor,
+    this.availableSlotColor,
+    this.bookedSlotText,
+    this.selectedSlotText,
+    this.availableSlotText,
+    this.availableSlotTextStyle,
+    this.selectedSlotTextStyle,
+    this.bookedSlotTextStyle,
+    this.gridScrollPhysics,
+    this.loadingWidget,
+    this.errorWidget,
+    this.uploadingWidget,
+    this.wholeDayIsBookedWidget,
+    this.pauseSlotColor,
+    this.pauseSlotText,
+    this.pauseSlots,
+    this.hideBreakTime,
+    this.locale,
+    this.startingDayOfWeek = StartingDayOfWeek.monday,
+    this.disabledDays,
+    this.disabledDates,
+    this.lastDay,
+    required this.avatar,
+    this.avataricon,
+    required this.medico,
+  }) : super(key: key);
 
   ///for the Calendar picker we use: [TableCalendar]
   ///credit: https://pub.dev/packages/table_calendar
@@ -151,7 +150,6 @@ class BookingCalendar extends StatelessWidget {
   final List<DateTime>? disabledDates;
 
   ///Display a listview instead of a gridview of slots; default is grid
-  final bool? listType;
 
   final String medico;
   final Widget avatar;
@@ -196,7 +194,6 @@ class BookingCalendar extends StatelessWidget {
         disabledDays: disabledDays,
         lastDay: lastDay,
         disabledDates: disabledDates,
-        listType: listType,
         medico: medico,
         avatar: avatar,
         avataricon: avataricon,
