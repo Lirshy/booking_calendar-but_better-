@@ -11,7 +11,6 @@ import '../model/enums.dart' as bc;
 import '../util/booking_util.dart';
 import 'booking_dialog.dart';
 import 'booking_explanation.dart';
-import 'booking_slot.dart';
 import 'common_button.dart';
 import 'common_card.dart';
 
@@ -284,8 +283,6 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                       controller.generateBookedSlots(
                           widget.convertStreamResultToDateTimeRanges(
                               streamResult: data));
-
-                      // if (widget.listType != null && widget.listType == true) {}
 
                       return Expanded(
                           child: (widget.wholeDayIsBookedWidget != null &&
