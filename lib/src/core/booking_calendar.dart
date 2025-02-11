@@ -41,7 +41,11 @@ class BookingCalendar extends StatelessWidget {
       this.startingDayOfWeek = StartingDayOfWeek.monday,
       this.disabledDays,
       this.disabledDates,
-      this.lastDay})
+      this.lastDay,
+      this.listType,
+      required this.avatar,
+      this.avataricon,
+      required this.medico,})
       : super(key: key);
 
   ///for the Calendar picker we use: [TableCalendar]
@@ -49,7 +53,7 @@ class BookingCalendar extends StatelessWidget {
 
   ///initial [BookingService] which contains the details of the service,
   ///and this service will get additional two parameters:
-  ///the [BookingService.bookingStart] and [BookingService.bookingEnd] date of the booking
+  ///the [BofokingService.bookingStart] and [BookingService.bookingEnd] date of the booking
   final BookingService bookingService;
 
   ///this function returns a [Stream] which will be passed to the [StreamBuilder],
@@ -146,6 +150,13 @@ class BookingCalendar extends StatelessWidget {
   ///Concrete List of dates when the day is unavailable, eg: holiday, everything is booked or you need to close or something.
   final List<DateTime>? disabledDates;
 
+  ///Display a listview instead of a gridview of slots; default is grid
+  final bool? listType;
+
+  final String medico;
+  final Widget avatar;
+  final Widget? avataricon;
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -172,7 +183,7 @@ class BookingCalendar extends StatelessWidget {
         bookedSlotText: bookedSlotText,
         selectedSlotColor: selectedSlotColor,
         selectedSlotText: selectedSlotText,
-        gridScrollPhysics: gridScrollPhysics,
+        theScrollPhysics: gridScrollPhysics,
         loadingWidget: loadingWidget,
         errorWidget: errorWidget,
         uploadingWidget: uploadingWidget,
@@ -185,6 +196,10 @@ class BookingCalendar extends StatelessWidget {
         disabledDays: disabledDays,
         lastDay: lastDay,
         disabledDates: disabledDates,
+        listType: listType,
+        medico: medico,
+        avatar: avatar,
+        avataricon: avataricon,
       ),
     );
   }
